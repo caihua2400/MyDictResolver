@@ -3,16 +3,19 @@ package hua.mydictresolver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     ContentResolver contentResolver;
     Button insert;
     Button search;
+    String Struri="content://"+"hua.mydictapplication.dictProvider"+"/words";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
                 ContentValues contentValues=new ContentValues();
                 contentValues.put("word",word);
                 contentValues.put("detail",detail);
-                contentResolver.insert();
+                Uri uri=Uri.parse(Struri);
+                contentResolver.insert(uri,contentValues);
+                Toast.makeText(MainActivity.this,"insert success",Toast.LENGTH_LONG).show();
 
             }
         });
