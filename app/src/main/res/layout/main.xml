@@ -26,5 +26,11 @@
         android:id="@+id/search"
         android:text="search"
         android:textSize="24dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bulkInsert"
+        android:text="BulkInsert"
+        android:textSize="24dp"/>
 
 </LinearLayout>

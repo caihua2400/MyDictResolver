@@ -11,11 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Vector;
+
 public class MainActivity extends AppCompatActivity {
     ContentResolver contentResolver;
     Button insert;
     Button search;
     String Struri="content://"+"hua.mydictapplication.dictProvider"+"/words";
+    Button bulkInsert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,25 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        bulkInsert=(Button) findViewById(R.id.bulkInsert);
+        bulkInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContentValues contentValues=new ContentValues();
+                contentValues.put("word","love");
+                contentValues.put("detail","like some one");
+                Vector<ContentValues> cw=new Vector<ContentValues>(5);
+                cw.add(contentValues);
+                ContentValues[] cvArray=new ContentValues[cw.size()];
+                cw.toArray(cvArray);
+                Uri uri=Uri.parse(Struri);
+                contentResolver.bulkInsert(uri,cvArray);
+
+
+
+            }
+        });
+
 
     }
 }
