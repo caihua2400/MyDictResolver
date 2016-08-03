@@ -30,7 +30,7 @@ public class MyAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         TextView t1=(TextView) view.findViewById(R.id.text1);
         TextView t2=(TextView) view.findViewById(R.id.text2);
-        if(cursor.moveToFirst()){
+
            int row1=cursor.getColumnIndex("word");
             int row2=cursor.getColumnIndex("detail");
             String word=cursor.getString(row1);
@@ -39,7 +39,7 @@ public class MyAdapter extends CursorAdapter {
             t2.setText(detail);
 
 
-        }
+
 
 
     }

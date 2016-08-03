@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //simpleCursorAdapter=new SimpleCursorAdapter(this,R.layout.list_item,null,new String[]{"word","detail"},new int[]{R.id.text1,R.id.text2},0);
         listView=(ListView) findViewById(R.id.listView);
         //listView.setAdapter(simpleCursorAdapter);
+        cursorAdapter=new MyAdapter(this, null, 0);
 
         listView.setAdapter(cursorAdapter);
 
@@ -55,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Swap the new cursor in.  (The framework will take care of closing the
         // old cursor once we return.)
-        cursorAdapter=new MyAdapter(this, data, 0);
-        //cursorAdapter.changeCursor(data);
+
+        cursorAdapter.changeCursor(data);
 
     }
 
