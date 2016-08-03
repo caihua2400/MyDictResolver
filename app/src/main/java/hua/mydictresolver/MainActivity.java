@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -23,20 +24,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     Button insert;
     Button search;
     String Struri="content://"+"hua.mydictapplication.dictProvider"+"/words";
-    SimpleCursorAdapter simpleCursorAdapter;
+    CursorAdapter cursorAdapter;
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        contentResolver=getContentResolver();
-        insert=(Button) findViewById(R.id.insert);
-        search=(Button) findViewById(R.id.search);
+
+
         getSupportLoaderManager().initLoader(URL_LOADER,null,this);
-        simpleCursorAdapter=new SimpleCursorAdapter(this,R.layout.list_item,null,new String[]{"word","detail"},new int[]{R.id.text1,R.id.text2},0);
+        //simpleCursorAdapter=new SimpleCursorAdapter(this,R.layout.list_item,null,new String[]{"word","detail"},new int[]{R.id.text1,R.id.text2},0);
         listView=(ListView) findViewById(R.id.listView);
-        listView.setAdapter(simpleCursorAdapter);
+        //listView.setAdapter(simpleCursorAdapter);
+        cursorAdapter=new MyAdapter(this, null, 0);
+        listView.setAdapter(cursorAdapter);
+
 
 
     }
@@ -52,13 +55,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Swap the new cursor in.  (The framework will take care of closing the
         // old cursor once we return.)
-        simpleCursorAdapter.changeCursor(data);
+        cursorAdapter.changeCursor(data);
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        simpleCursorAdapter.swapCursor(null);
+        cursorAdapter.swapCursor(null);
 
     }
 }
